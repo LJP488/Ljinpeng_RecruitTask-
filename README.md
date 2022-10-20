@@ -1,51 +1,20 @@
-import numpy as np
-import gym
-import time
-
-def get_action(weights, observation):
-    wxb = np.dot(weights[:4], observation) + weights[4]
-    if wxb >= 0:
-        return 1
-    else:
-        return 0
-
-def get_sum_reward_by_weights(env, weights):
-    observation = env.reset()
-    sum_reward = 0
-    for t in range(1000):
-        action = get_action(weights, observation)
-        observation, reward, done, info = env.step(action)
-        sum_reward += reward
-        if done:
-            break
-    return sum_reward
-env.close()
-
-def get_weights_by_random_guess():
-    return np.random.rand(5)
-
-def get_weights_by_hill_climbing(best_weights):
-    return best_weights + np.random.normal(0, 0.1, 5)
-
-def get_best_result(algo="random_guess"):
-    env = gym.make("CartPole-v0")
-    np.random.seed(10)
-    best_reward = 0
-    best_weights = np.random.rand(5)
-
-    for iter in range(10000):
-        cur_weights = None
-
-        if algo == "hill_climbing":
-            cur_weights = get_weights_by_hill_climbing(best_weights)
-        else:
-            cur_weights = get_weights_by_random_guess()
-        cur_sum_reward = get_sum_reward_by_weights(env, cur_weights)
-        if cur_sum_reward > best_reward:
-            best_reward = cur_sum_reward
-            best_weights = cur_weights
-        if best_reward >= 200:
-            break
-    print(iter, best_reward, best_weights)
-    return best_reward, best_weights
-print(get_best_result("hill_climbing"))
+|时间|学习过程|遇到问题|解决方法|
+|----|-------|-------|-------|
+|10月2号|尝试下载openai gym|好多问题|看B站|
+|10月3号|继续下载|无法下载tensorflow|上网找方法|
+|10月4号|下载成功，并引入pycharm运行|无|
+|10月6号|开始观看强化学习|看错了|
+|10月7号|正式观看深度强化学习，根据视频内容写下第一份代码|无|无|
+|10月8号|价值函数学习|
+|10月9号|策略函数学习|
+|10月10号|Actor—Critic|
+|10月11号|AlphaGo实践了解|
+|10月12号|数学基础学习：蒙特卡洛|
+|10月13号|Sarsa算法和Q-learning算法|
+10月14号|学习对价值函数和策略函数的改进方法|
+|10月15号|开始找代码实践|视频没代码实践，B站上没教程|无|
+|10月16号|代码实践失败|
+|10月17号|没学到啥|
+|10月18号|模仿网上代码|无法真正学习代码|问师兄|
+|10月19号|找到了一些门路，实践自己的代码并提交|运行效果不好|上网找，没解决|
+|10月20号|开始学习python|
